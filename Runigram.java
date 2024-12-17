@@ -39,8 +39,15 @@ public class Runigram {
 		// For each pixel (i,j), reads 3 values from the file,
 		// creates from the 3 colors a new Color object, and 
 		// makes pixel (i,j) refer to that object.
-		//// Replace the following statement with your code.
-		return null;
+		for (int i = 0; i < numRows; i++) {
+			for (int j = 0; j < numCols; j++) {
+				int r = in.readInt(); 
+				int g = in.readInt(); 
+				int b = in.readInt(); 
+				image[i][j] = new Color(r, g, b); 
+			}
+		}
+		return image;
 	}
 
     // Prints the RGB values of a given color.
@@ -194,8 +201,17 @@ public class Runigram {
 	 * of the source image.
 	 */
 	public static void morph(Color[][] source, Color[][] target, int n) {
-		//// Replace this comment with your code
-	}
+		
+		target = scaled(target, source[0].length, source.length);
+		
+		setCanvas(source);	
+		
+		for (int k = 0; k <= n; k++) {
+			double alpha = (double) k / n; 
+			Color[][] intermediateImage = blend(source, target, alpha); 
+			display(intermediateImage);   
+			StdDraw.pause(50);        
+	} }
 	
 	/** Creates a canvas for the given image. */
 	public static void setCanvas(Color[][] image) {
